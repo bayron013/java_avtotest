@@ -10,8 +10,8 @@ public class Task {
     System.out.println("Расстояние между точками p1 и p2 = " + p1.distance(p2));
   }
   public double distance(Point p1, Point p2){
-    double dx = this.x - p1.x;
-    double dy = this.y - this.y;
+    double dx = p1.x - p2.x;
+    double dy = p1.y - p2.y;
     return Math.sqrt(dx*dx + dy*dy);
   }
 }
