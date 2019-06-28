@@ -1,7 +1,7 @@
+/*
 package ru.sandbox;
 
 public class Task {
-
   public static void main(String[] args) {
 
     Point p1 = new Point(33.17, 11);
@@ -14,4 +14,4 @@ public class Task {
     double dy = p1.y - p2.y;
     return Math.sqrt(dx*dx + dy*dy);
   }
-}
+} */

@@ -1,4 +1,4 @@
-package ru.sandbox;
+/*package ru.sandbox;
 
 public class Point {
   public double x;
@@ -12,3 +12,4 @@ public class Point {
     return distance(p.x, p.y);
   }
 }
+*/
