@@ -1,15 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'application'
-<<<<<<< HEAD
-mainClassName = "Myfirstprogram"
-=======
-mainClassName = "ru.sandbox.Task"
+mainClassName = "ru.sandbox.Myfirstprogram"
 
 repositories {
     mavenCentral()
 }
-
 dependencies {
     implementation 'org.testng:testng:6.14.3'
 }
->>>>>>> e627838fae0c079f24c3a4496fde32a04c118f10

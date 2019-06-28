@@ -1,4 +1,4 @@
-/*package ru.sandbox;
+package ru.sandbox;
 
 public class Point {
   public double x;
@@ -14,4 +14,3 @@ public class Point {
     return Math.sqrt(dx*dx + dy*dy);
   }
 }
-*/
