@@ -1,3 +1,4 @@
+/*
 package ru.avtotest.ab;
 
 public class GroupData {
@@ -23,3 +24,4 @@ public class GroupData {
     return footer;
   }
 }
+*/

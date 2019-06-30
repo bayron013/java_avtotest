@@ -1,3 +1,4 @@
+/*
 package ru.avtotest.ab;
 
 import java.util.concurrent.TimeUnit;
@@ -86,3 +87,4 @@ public class GroupCreationTests {
     }
   }
 }
+*/
