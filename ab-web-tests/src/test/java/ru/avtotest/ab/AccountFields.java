@@ -1,4 +1,4 @@
-package ru.avtotest.ab.model;
+package ru.avtotest.ab;
 
 public class AccountFields {
   private final String firstname;
