@@ -1,5 +1,4 @@
-/*
-package ru.avtotest.ab;
+package ru.avtotest.ab.model;
 
 public class GroupData {
   private final String name;
@@ -24,4 +23,3 @@ public class GroupData {
     return footer;
   }
 }
-*/
