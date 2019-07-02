@@ -1,20 +1,27 @@
-package ru.avtotest.ab;
+package ru.avtotest.ab.appmanager;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+import ru.avtotest.ab.model.AccountFields;
+import ru.avtotest.ab.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.Select;
+public class ApplcationMeneger {
+  public WebDriver wd;
 
-public class AccountCreationTests {
-  private WebDriver wd;
-
-  @BeforeMethod(alwaysRun = true)
-  public void setUp(String username, String password) throws Exception {
-    wd = new ChromeDriver();
+  public void init() {
+    wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
+    login("admin", "secret");
+  }
+
+  public void login(String username, String password) {
     wd.findElement(By.name("user")).click();
     wd.findElement(By.name("user")).clear();
     wd.findElement(By.name("user")).sendKeys(username);
@@ -23,36 +30,78 @@ public class AccountCreationTests {
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
-  @Test
-  public void testAccountCreation() throws Exception {
-    initAccountCreation();
-    fillAccountForm(new AccountFields("Michael", "Johnson", "Alexandrovich",
-            "Gorilla777", "Title Area", "Volkswagen",
-            "Russia, Moscow, Central St., house 5", "Sweet Home", "89997774422",
-            "Work Hard", "none", "E-mail #1", "E-mail #2",
-            "E-mail #3", "facebook.com"));
-    setBDaydata("6", "October", "1989");
-    setGroup();
-    submitAccount();
-    returntohomepage();
-    wd.findElement(By.linkText("Logout")).click();
+  public void returnToGroupPage() {
+    wd.findElement(By.linkText("groups")).click();
   }
 
-  private void returntohomepage() {
+  public void submitGroupCreation() {
+    wd.findElement(By.name("submit")).click();
+  }
+
+  public void fillGroupForm(GroupData groupData) {
+    wd.findElement(By.name("group_name")).click();
+    wd.findElement(By.name("group_name")).clear();
+    wd.findElement(By.name("group_name")).sendKeys(groupData.getName());
+    wd.findElement(By.name("group_header")).click();
+    wd.findElement(By.name("group_header")).clear();
+    wd.findElement(By.name("group_header")).sendKeys(groupData.getHeader());
+    wd.findElement(By.name("group_footer")).clear();
+    wd.findElement(By.name("group_footer")).sendKeys(groupData.getFooter());
+  }
+
+  public void initGroupCreation() {
+    wd.findElement(By.name("new")).click();
+  }
+
+  public void gotoGroupPage() {
+    wd.findElement(By.linkText("groups")).click();
+  }
+
+  public void stop() {
+    wd.quit();
+  }
+
+  public boolean isElementPresent(By by) {
+    try {
+      wd.findElement(by);
+      return true;
+    } catch (NoSuchElementException e) {
+      return false;
+    }
+  }
+
+  public boolean isAlertPresent() {
+    try {
+      wd.switchTo().alert();
+      return true;
+    } catch (NoAlertPresentException e) {
+      return false;
+    }
+  }
+
+  public void deleteSelecteGroups() {
+    wd.findElement(By.name("delete")).click();
+  }
+
+  public void selectGroup() {
+    wd.findElement(By.name("selected[]")).click();
+  }
+
+  public void returntohomepage() {
     wd.findElement(By.linkText("home page")).click();
   }
 
-  private void submitAccount() {
+  public void submitAccount() {
     wd.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]")).click();
   }
 
-  private void setGroup() {
+  public void setGroup() {
     wd.findElement(By.name("new_group")).click();
     new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 1");
     wd.findElement(By.name("new_group")).click();
   }
 
-  private void setBDaydata(String birthDay, String dirthMonth, String birthYear) {
+  public void setBDaydata(String birthDay, String dirthMonth, String birthYear) {
     wd.findElement(By.name("bday")).click();
     new Select(wd.findElement(By.name("bday"))).selectByVisibleText(birthDay);
     wd.findElement(By.name("bday")).click();
@@ -64,7 +113,7 @@ public class AccountCreationTests {
     wd.findElement(By.name("byear")).sendKeys(birthYear);
   }
 
-  private void fillAccountForm(AccountFields accountFields) {
+  public void fillAccountForm(AccountFields accountFields) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(accountFields.getFirstname());
@@ -100,30 +149,7 @@ public class AccountCreationTests {
     wd.findElement(By.name("homepage")).sendKeys(accountFields.getHomepage());
   }
 
-  private void initAccountCreation() {
+  public void initAccountCreation() {
     wd.findElement(By.linkText("add new")).click();
-  }
-
-  @AfterMethod(alwaysRun = true)
-  public void tearDown() throws Exception {
-    wd.quit();
-  }
-
-  private boolean isElementPresent(By by) {
-    try {
-      wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  private boolean isAlertPresent() {
-    try {
-      wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
   }
 }
