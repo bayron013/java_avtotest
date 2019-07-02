@@ -8,17 +8,17 @@ public class AccountCreationTests extends TestBase {
 
   @Test
   public void testAccountCreation() throws Exception {
-    app.initAccountCreation();
-    app.fillAccountForm(new AccountFields("Michael", "Johnson", "Alexandrovich",
+    app.getAccountHelper().initAccountCreation();
+    app.getAccountHelper().fillAccountForm(new AccountFields("Michael", "Johnson", "Alexandrovich",
             "Gorilla777", "Title Area", "Volkswagen",
             "Russia, Moscow, Central St., house 5", "Sweet Home", "89997774422",
             "Work Hard", "none", "E-mail #1", "E-mail #2",
             "E-mail #3", "facebook.com"));
-    app.setBDaydata("6", "October", "1989");
-    app.setGroup();
-    app.submitAccount();
-    app.returntohomepage();
-    app.wd.findElement(By.linkText("Logout")).click();
+    app.getAccountHelper().setBDaydata("6", "October", "1989");
+    app.getAccountHelper().setGroup();
+    app.getAccountHelper().submitAccount();
+    app.getNavigationHelper().returntohomepage();
+    app.getGroupHelper().wd.findElement(By.linkText("Logout")).click();
   }
 
 }
