@@ -12,7 +12,7 @@ public class AccountHelper extends HelperBase{
   }
 
   public void submitAccount() {
-    click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]"));
+    click(By.name("submit"));
   }
 
   public void setGroup() {

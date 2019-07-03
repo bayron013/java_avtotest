@@ -22,6 +22,7 @@ public class ApplcationManager {
     navigationHelper = new NavigationHelper(wd);
     sessionHelper = new SessionHelper(wd);
     accountHelper = new AccountHelper(wd);
+    sessionHelper.logout();
     sessionHelper.login("admin", "secret");
   }
 
@@ -48,5 +49,9 @@ public class ApplcationManager {
 
   public AccountHelper getAccountHelper() {
     return accountHelper;
+  }
+
+  public SessionHelper getSessionHelper() {
+    return sessionHelper;
   }
 }

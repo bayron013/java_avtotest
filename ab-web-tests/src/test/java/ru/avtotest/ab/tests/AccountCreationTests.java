@@ -18,7 +18,6 @@ public class AccountCreationTests extends TestBase {
     app.getAccountHelper().setGroup();
     app.getAccountHelper().submitAccount();
     app.getNavigationHelper().returntohomepage();
-    app.getGroupHelper().wd.findElement(By.linkText("Logout")).click();
+    app.getSessionHelper().logout();
   }
-
 }
