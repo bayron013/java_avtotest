@@ -58,4 +58,12 @@ public class AccountHelper extends HelperBase{
   public void initAccountCreation() {
     click(By.linkText("add new"));
   }
+
+  public void editAccount() {
+    click(By.name("Edit"));
+  }
+
+  public void deletAccount() {
+    click(By.name("Delete"));
+  }
 }
