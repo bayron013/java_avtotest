@@ -1,12 +1,13 @@
 package ru.avtotest.ab.tests;
 
+import org.openqa.selenium.remote.BrowserType;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import ru.avtotest.ab.appmanager.ApplcationManager;
 
 public class TestBase {
 
-  protected final ApplcationManager app = new ApplcationManager();
+  protected final ApplcationManager app = new ApplcationManager(BrowserType.FIREFOX);
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
