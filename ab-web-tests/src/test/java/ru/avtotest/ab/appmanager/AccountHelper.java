@@ -3,6 +3,7 @@ package ru.avtotest.ab.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import ru.avtotest.ab.model.AccountFields;
 
 public class AccountHelper extends HelperBase{
@@ -15,11 +16,10 @@ public class AccountHelper extends HelperBase{
     click(By.name("submit"));
   }
 
-  public void setGroup() {
-    wd.findElement(By.name("new_group")).click();
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 1");
-    wd.findElement(By.name("new_group")).click();
-  }  // оставил эту и аналогичные части кода не тронутыми, так как в курсе ещё не объяснялось как параметризовать участки кода с drooplist.
+  public void updateAccount() {
+    click(By.name("update"));
+  }
+
 
   public void setBDaydata(String birthDay, String dirthMonth, String birthYear) {
     wd.findElement(By.name("bday")).click();
@@ -31,7 +31,7 @@ public class AccountHelper extends HelperBase{
     addfield(By.name("byear"), birthYear);
   }
 
-  public void fillAccountForm(AccountFields accountFields) {
+  public void fillAccountForm(AccountFields accountFields, boolean creation) {
     addfield(By.name("firstname"), accountFields.getFirstname());
     addfield(By.name("middlename"), accountFields.getMiddlename());
     addfield(By.name("lastname"), accountFields.getLastname());
@@ -47,6 +47,11 @@ public class AccountHelper extends HelperBase{
     addfield(By.name("email2"), accountFields.getSecondEmail());
     addfield(By.name("email3"), accountFields.getThirdEmail());
     addfield(By.name("homepage"), accountFields.getHomepage());
+    if (creation){
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 1");
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
   }
 
   private void addfield(By locator, String text) {
@@ -60,10 +65,10 @@ public class AccountHelper extends HelperBase{
   }
 
   public void editAccount() {
-    click(By.name("Edit"));
+    click(By.xpath("//img[@alt='Edit']"));
   }
 
   public void deletAccount() {
-    click(By.name("Delete"));
+    click(By.name("update"));
   }
 }

@@ -16,8 +16,12 @@ public class AccountFields {
   private final String secondEmail;
   private final String thirdEmail;
   private final String homepage;
+  private String group;
 
-  public AccountFields(String firstname, String middlename, String lastname, String nickname, String titlearea, String company, String address, String home, String mobilenumber, String aboutworkfield, String fax, String firstEmail, String secondEmail, String thirdEmail, String homepage) {
+  public AccountFields(String firstname, String middlename, String lastname, String nickname,
+                       String titlearea, String company, String address, String home,
+                       String mobilenumber, String aboutworkfield, String fax, String firstEmail,
+                       String secondEmail, String thirdEmail, String homepage, String group) {
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -33,6 +37,7 @@ public class AccountFields {
     this.secondEmail = secondEmail;
     this.thirdEmail = thirdEmail;
     this.homepage = homepage;
+    this.group = group;
   }
 
   public String getFirstname() {
@@ -93,5 +98,9 @@ public class AccountFields {
 
   public String getHomepage() {
     return homepage;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }

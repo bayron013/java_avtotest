@@ -2,7 +2,7 @@ package ru.avtotest.ab.tests;
 
 import org.testng.annotations.Test;
 
-public class AccountDeletion extends TestBase{
+public class AccountDeletionTests extends TestBase{
 
   @Test
   public void testAccountDeletion(){
