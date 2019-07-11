@@ -48,7 +48,7 @@ public class AccountHelper extends HelperBase{
     addfield(By.name("email3"), accountFields.getThirdEmail());
     addfield(By.name("homepage"), accountFields.getHomepage());
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 1");
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 8");
 
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
