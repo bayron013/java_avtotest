@@ -49,6 +49,7 @@ public class AccountHelper extends HelperBase{
     addfield(By.name("homepage"), accountFields.getHomepage());
     if (creation){
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 1");
+
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }

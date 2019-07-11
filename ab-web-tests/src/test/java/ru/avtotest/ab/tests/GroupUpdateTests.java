@@ -13,7 +13,7 @@ public class GroupUpdateTests extends TestBase{
     }
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().editGroup();
-    app.getGroupHelper().fillGroupForm(new GroupData("Group 1", "Group header", "Group footer"));
+    app.getGroupHelper().fillGroupForm(new GroupData("Group 8", "Група крови", "На рукаве"));
     app.getGroupHelper().updateGroup();
     app.getGroupHelper().returnToGroupPage();
     app.getSessionHelper().logout();

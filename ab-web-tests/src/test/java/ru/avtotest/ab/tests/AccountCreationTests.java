@@ -1,6 +1,5 @@
 package ru.avtotest.ab.tests;
 
-import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 
