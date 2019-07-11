@@ -71,4 +71,23 @@ public class AccountHelper extends HelperBase{
   public void deletAccount() {
     click(By.name("update"));
   }
+
+  public void tohomepage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home page"));
+  }
+
+  public void createAccount(AccountFields account, boolean b) {
+    initAccountCreation();
+    fillAccountForm(account, true);
+    setBDaydata("6", "October", "1989");
+    submitAccount();
+    tohomepage();
+  }
+
+  public boolean isThareAAccount() {
+    return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
 }
