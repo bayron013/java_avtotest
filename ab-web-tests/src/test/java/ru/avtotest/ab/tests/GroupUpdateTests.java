@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.GroupData;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupUpdateTests extends TestBase{
@@ -18,7 +18,7 @@ public class GroupUpdateTests extends TestBase{
     List<GroupData> before = app.getGroupHelper().getGroupList();
     app.getGroupHelper().selectGroup(before.size() - 1);
     app.getGroupHelper().editGroup();
-    GroupData group = new GroupData(before.get(before.size() - 1).getId(), "Group 8", "Група крови", "На рукаве");
+    GroupData group = new GroupData(before.get(before.size() - 1).getId(), "Группочка", "Група крови", "На рукаве");
     app.getGroupHelper().fillGroupForm(group);
     app.getGroupHelper().updateGroup();
     app.getGroupHelper().returnToGroupPage();
@@ -28,7 +28,10 @@ public class GroupUpdateTests extends TestBase{
 
     before.remove(before.size() - 1);
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
     app.getSessionHelper().logout();
 

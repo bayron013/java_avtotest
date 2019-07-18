@@ -4,7 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.GroupData;
 
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.List;
 
 public class GroupCreationTests extends TestBase {
@@ -13,19 +13,17 @@ public class GroupCreationTests extends TestBase {
   public void testGroupCreation() throws Exception {
     app.getNavigationHelper().gotoGroupPage();
     List<GroupData> before = app.getGroupHelper().getGroupList();
-    GroupData group = new GroupData("Тестовая", "Головняк", "Ногокод");
+    GroupData group = new GroupData("Группировка", "Бошка", "Нога");
     app.getGroupHelper().createGroup(group);
     List<GroupData> after = app.getGroupHelper().getGroupList();
     Assert.assertEquals(after.size(), before.size() + 1);
 
-    int max = 0;
-    for (GroupData g : after){
-      if (g.getId() > max)
-        max = g.getId();
-    }
-    group.setId(max);
+
     before.add(group);
-    Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
+    Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
+    before.sort(byId);
+    after.sort(byId);
+    Assert.assertEquals(before, after);
 
     app.getSessionHelper().logout();
 
