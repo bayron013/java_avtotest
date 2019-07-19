@@ -104,17 +104,18 @@ public class AccountHelper extends HelperBase{
     List<AccountFields> accounts = new ArrayList<AccountFields>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
-//      String id = element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value");
+      int id = Integer.parseInt(element.findElement(By.xpath
+              (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String address = element.findElement(By.xpath(".//td[4]")).getText();
-      AccountFields account = new AccountFields(firstname,
+      AccountFields account = new AccountFields(id, firstname,
               null, lastname, null, null,
               null, address, null,
               null,null, null,
               null, null, null,
               null, null);
-      accounts.add(account);	accounts.add(account);
+      accounts.add(account);
     }
     return accounts;
   }
