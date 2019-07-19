@@ -48,7 +48,7 @@ public class AccountHelper extends HelperBase{
     addfield(By.name("email3"), accountFields.getThirdEmail());
     addfield(By.name("homepage"), accountFields.getHomepage());
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Group 8");
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Группировка");
 
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -69,8 +69,8 @@ public class AccountHelper extends HelperBase{
     click(By.xpath("//img[@alt='Edit']"));
   }
 
-  public void deletAccount() {
-    click(By.name("update"));
+  public void deleteAccount() {
+    wd.findElement(By.xpath("(//input[@name='update'])[3]")).click();
   }
 
   public void tohomepage() {
@@ -90,5 +90,9 @@ public class AccountHelper extends HelperBase{
 
   public boolean isThareAAccount() {
     return isElementPresent(By.xpath("//img[@alt='Edit']"));
+  }
+
+  public int getAccountCount() {
+    return wd.findElements(By.name("selected[]")).size();
   }
 }

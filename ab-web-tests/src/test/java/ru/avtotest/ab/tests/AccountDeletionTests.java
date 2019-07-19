@@ -1,5 +1,6 @@
 package ru.avtotest.ab.tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 
@@ -14,9 +15,12 @@ public class AccountDeletionTests extends TestBase{
               "Work Hard", "none", "E-mail #1", "E-mail #2",
               "E-mail #3", "facebook.com", null), false);
     }
+    int before = app.getAccountHelper().getAccountCount();
     app.getAccountHelper().editAccount();
-    app.getAccountHelper().deletAccount();
+    app.getAccountHelper().deleteAccount();
     app.getNavigationHelper().returntohomepage();
+    int after = app.getAccountHelper().getAccountCount();
+    Assert.assertEquals(after, before - 1);
     app.getSessionHelper().logout();
   }
 }

@@ -7,7 +7,7 @@ import ru.avtotest.ab.appmanager.ApplcationManager;
 
 public class TestBase {
 
-  protected final ApplcationManager app = new ApplcationManager(BrowserType.FIREFOX);
+  protected final ApplcationManager app = new ApplcationManager(BrowserType.CHROME);
 
   @BeforeMethod(alwaysRun = true)
   public void setUp() throws Exception {
