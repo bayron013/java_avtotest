@@ -16,7 +16,7 @@ public class AccountDeletionTests extends TestBase{
               "E-mail #3", "facebook.com", null), false);
     }
     int before = app.getAccountHelper().getAccountCount();
-    app.getAccountHelper().editAccount();
+    app.getAccountHelper().editAccount(before - 4);
     app.getAccountHelper().deleteAccount();
     app.getNavigationHelper().returntohomepage();
     int after = app.getAccountHelper().getAccountCount();

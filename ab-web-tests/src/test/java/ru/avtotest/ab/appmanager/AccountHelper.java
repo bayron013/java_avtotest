@@ -2,9 +2,13 @@ package ru.avtotest.ab.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.avtotest.ab.model.AccountFields;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountHelper extends HelperBase{
 
@@ -65,8 +69,8 @@ public class AccountHelper extends HelperBase{
     click(By.linkText("add new"));
   }
 
-  public void editAccount() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void editAccount(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
   public void deleteAccount() {
@@ -94,5 +98,24 @@ public class AccountHelper extends HelperBase{
 
   public int getAccountCount() {
     return wd.findElements(By.name("selected[]")).size();
+  }
+
+  public List<AccountFields> getAccountList() {
+    List<AccountFields> accounts = new ArrayList<AccountFields>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+    for (WebElement element : elements) {
+//      String id = element.findElement(By.xpath(".//td[1]/input[@type='checkbox']")).getAttribute("value");
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
+      String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String address = element.findElement(By.xpath(".//td[4]")).getText();
+      AccountFields account = new AccountFields(firstname,
+              null, lastname, null, null,
+              null, address, null,
+              null,null, null,
+              null, null, null,
+              null, null);
+      accounts.add(account);	accounts.add(account);
+    }
+    return accounts;
   }
 }
