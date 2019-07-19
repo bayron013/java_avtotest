@@ -95,11 +95,11 @@ public class AccountHelper extends HelperBase{
   public boolean isThareAAccount() {
     return isElementPresent(By.xpath("//img[@alt='Edit']"));
   }
-
+/*
   public int getAccountCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
-
+*/
   public List<AccountFields> getAccountList() {
     List<AccountFields> accounts = new ArrayList<AccountFields>();
     List<WebElement> elements = wd.findElements(By.name("entry"));

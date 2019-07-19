@@ -59,11 +59,11 @@ public class GroupHelper extends HelperBase{
     returnToGroupPage();
 
   }
-
+/*
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
-
+*/
   public List<GroupData> getGroupList() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));

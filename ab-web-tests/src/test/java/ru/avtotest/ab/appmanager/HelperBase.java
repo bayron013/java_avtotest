@@ -1,7 +1,6 @@
 package ru.avtotest.ab.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
@@ -26,7 +25,7 @@ public class HelperBase {
       }
     }
   }
-
+/*
   public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
@@ -35,6 +34,7 @@ public class HelperBase {
       return false;
     }
   }
+*/
   public boolean isElementPresent(By locator) {
     try {
       wd.findElement(locator);

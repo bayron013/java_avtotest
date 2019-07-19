@@ -135,10 +135,10 @@ public class AccountFields {
     return homepage;
   }
 
-  public String getGroup() {
+/*  public String getGroup() {
     return group;
   }
-
+*/
   @Override
   public String toString() {
     return "AccountFields{" +
