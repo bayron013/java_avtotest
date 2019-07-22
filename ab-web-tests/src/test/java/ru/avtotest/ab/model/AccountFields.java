@@ -3,72 +3,101 @@ package ru.avtotest.ab.model;
 import java.util.Objects;
 
 public class AccountFields {
-  private int id;
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String nickname;
-  private final String titlearea;
-  private final String company;
-  private final String address;
-  private final String home;
-  private final String mobilenumber;
-  private final String aboutworkfield;
-  private final String fax;
-  private final String firstEmail;
-  private final String secondEmail;
-  private final String thirdEmail;
-  private final String homepage;
-  private String group;
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String middlename;
+  private String lastname;
+  private String nickname;
+  private String titlearea;
+  private String company;
+  private String address;
+  private String home;
+  private String mobilenumber;
+  private String aboutworkfield;
+  private String fax;
+  private String firstEmail;
+  private String secondEmail;
+  private String thirdEmail;
+  private String homepage;
 
-  public AccountFields(String firstname, String middlename, String lastname, String nickname,
-                       String titlearea, String company, String address, String home,
-                       String mobilenumber, String aboutworkfield, String fax, String firstEmail,
-                       String secondEmail, String thirdEmail, String homepage, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.titlearea = titlearea;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobilenumber = mobilenumber;
-    this.aboutworkfield = aboutworkfield;
-    this.fax = fax;
-    this.firstEmail = firstEmail;
-    this.secondEmail = secondEmail;
-    this.thirdEmail = thirdEmail;
-    this.homepage = homepage;
-    this.group = group;
+  public AccountFields whithId(int id) {
+    this.id = id;
+    return this;
   }
 
-  public AccountFields(int id,String firstname, String middlename, String lastname, String nickname,
-                       String titlearea, String company, String address, String home,
-                       String mobilenumber, String aboutworkfield, String fax, String firstEmail,
-                       String secondEmail, String thirdEmail, String homepage, String group) {
-    this.id = id;
+  public AccountFields whithFirstname(String firstname) {
     this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.titlearea = titlearea;
-    this.company = company;
-    this.address = address;
-    this.home = home;
-    this.mobilenumber = mobilenumber;
-    this.aboutworkfield = aboutworkfield;
-    this.fax = fax;
-    this.firstEmail = firstEmail;
-    this.secondEmail = secondEmail;
-    this.thirdEmail = thirdEmail;
-    this.homepage = homepage;
-    this.group = group;
+    return this;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public AccountFields whithMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public AccountFields whithLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public AccountFields whithNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public AccountFields whithTitlearea(String titlearea) {
+    this.titlearea = titlearea;
+    return this;
+  }
+
+  public AccountFields whithCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public AccountFields whithAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public AccountFields whithHome(String home) {
+    this.home = home;
+    return this;
+  }
+
+  public AccountFields whithMobilenumber(String mobilenumber) {
+    this.mobilenumber = mobilenumber;
+    return this;
+  }
+
+  public AccountFields whithAboutworkfield(String aboutworkfield) {
+    this.aboutworkfield = aboutworkfield;
+    return this;
+  }
+
+  public AccountFields whithFax(String fax) {
+    this.fax = fax;
+    return this;
+  }
+
+  public AccountFields whithFirstEmail(String firstEmail) {
+    this.firstEmail = firstEmail;
+    return this;
+  }
+
+  public AccountFields whithSecondEmail(String secondEmail) {
+    this.secondEmail = secondEmail;
+    return this;
+  }
+
+  public AccountFields whithThirdEmail(String thirdEmail) {
+    this.thirdEmail = thirdEmail;
+    return this;
+  }
+
+  public AccountFields whithHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
   }
 
   public int getId() {

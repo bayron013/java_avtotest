@@ -1,6 +1,7 @@
 package ru.avtotest.ab.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 
@@ -8,26 +9,27 @@ import java.util.List;
 
 public class AccountDeletionTests extends TestBase{
 
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.account().list().size() == 0) {
+      app.account().create(new AccountFields()
+              .whithFirstname("Michael").whithLastname("Alexandrovich").whithNickname("Gorilla777")
+              .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home"), false);
+    }
+  }
+
   @Test
   public void testAccountDeletion(){
-    if (! app.getAccountHelper().isThareAAccount()) {
-      app.getAccountHelper().createAccount(new AccountFields("Michael",
-              "Johnson", "Alexandrovich","Gorilla777",
-              "Title Area", "Volkswagen","Russia",
-              "Sweet Home", "89997774422","Work Hard",
-              "none", "E-mail #1", "E-mail #2",
-              "E-mail #3", "facebook.com", null), false);
-    }
-    List<AccountFields> before = app.getAccountHelper().getAccountList();
-    app.getAccountHelper().editAccount(before.size() - 1);
-    app.getAccountHelper().deleteAccount();
-    app.getNavigationHelper().returntohomepage();
-    List<AccountFields> after = app.getAccountHelper().getAccountList();
+    List<AccountFields> before = app.account().list();
+    int index = before.size() - 1;
+    app.account().edit(index);
+    app.account().delete();
+    app.goTo().homePage();
+    List<AccountFields> after = app.account().list();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(index);
     Assert.assertEquals(before, after);
 
-    app.getSessionHelper().logout();
   }
 }

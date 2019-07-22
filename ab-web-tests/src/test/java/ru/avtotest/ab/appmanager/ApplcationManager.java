@@ -53,19 +53,19 @@ public class ApplcationManager {
     wd.quit();
   }
 
-  public GroupHelper getGroupHelper() {
+  public GroupHelper group() {
     return groupHelper;
   }
 
-  public NavigationHelper getNavigationHelper() {
+  public NavigationHelper goTo() {
     return navigationHelper;
   }
 
-  public AccountHelper getAccountHelper() {
+  public AccountHelper account() {
     return accountHelper;
   }
 
-  public SessionHelper getSessionHelper() {
+/*  public SessionHelper getSessionHelper() {
     return sessionHelper;
-  }
+  } */
 }
