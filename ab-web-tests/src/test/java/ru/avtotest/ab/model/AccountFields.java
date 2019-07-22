@@ -135,17 +135,12 @@ public class AccountFields {
     return homepage;
   }
 
-/*  public String getGroup() {
-    return group;
-  }
-*/
   @Override
   public String toString() {
     return "AccountFields{" +
-            "id='" + id + '\'' +
+            "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
-            ", address='" + address + '\'' +
             '}';
   }
 
@@ -155,12 +150,11 @@ public class AccountFields {
     if (o == null || getClass() != o.getClass()) return false;
     AccountFields that = (AccountFields) o;
     return Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname) &&
-            Objects.equals(address, that.address);
+            Objects.equals(lastname, that.lastname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstname, lastname, address);
+    return Objects.hash(firstname, lastname);
   }
 }

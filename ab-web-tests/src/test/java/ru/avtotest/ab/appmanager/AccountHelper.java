@@ -108,10 +108,9 @@ public class AccountHelper extends HelperBase{
               (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
-      String address = element.findElement(By.xpath(".//td[4]")).getText();
       AccountFields account = new AccountFields(id, firstname,
               null, lastname, null, null,
-              null, address, null,
+              null, null, null,
               null,null, null,
               null, null, null,
               null, null);
