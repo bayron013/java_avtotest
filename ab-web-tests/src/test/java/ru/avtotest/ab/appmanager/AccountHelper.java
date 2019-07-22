@@ -7,8 +7,11 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.avtotest.ab.model.AccountFields;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static org.testng.Assert.assertTrue;
 
 public class AccountHelper extends HelperBase{
 
@@ -69,19 +72,30 @@ public class AccountHelper extends HelperBase{
     click(By.linkText("add new"));
   }
 
+  public void deleteSelectedAccount() {
+    click(By.xpath("//input[@value='Delete']"));
+    wd.switchTo().alert().accept();
+  }
+// проблема с выбором групп для модификации
   public void edit(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+    wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void delete() {
-    wd.findElement(By.xpath("(//input[@name='update'])[3]")).click();
+  public void editAccountById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+  }
+
+  public void delete(AccountFields account) {
+    editAccountById(account.getId());
+    deleteSelectedAccount();
+    tohomepage();
   }
 
   public void tohomepage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
-    click(By.linkText("home page"));
+    click(By.linkText("home"));
   }
 
   public void create(AccountFields account, boolean b) {
@@ -92,15 +106,15 @@ public class AccountHelper extends HelperBase{
     tohomepage();
   }
 
-  public void modify(int index, AccountFields account) {
-    edit(index);
+  public void modify(AccountFields account) {
+    editAccountById(account.getId());
     fillAccountForm(account, false);
     setBDaydata("6", "October", "1989");
     updateAccount();
   }
 
-  public List<AccountFields> list() {
-    List<AccountFields> accounts = new ArrayList<AccountFields>();
+  public Set<AccountFields> all() {
+    Set<AccountFields> accounts = new HashSet<AccountFields>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.xpath

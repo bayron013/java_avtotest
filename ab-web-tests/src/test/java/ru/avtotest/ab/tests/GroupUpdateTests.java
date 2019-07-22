@@ -5,35 +5,31 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.GroupData;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupUpdateTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
     app.goTo().groupPage();
-    if (app.group().list().size() == 0) {
+    if (app.group().all().size() == 0) {
       app.group().create(new GroupData().whithName("Группа рас"));
     }
   }
 
   @Test
   public void testGroupUpdate() {
-    List<GroupData> before = app.group().list();
-    int index = before.size() - 1;
+    Set<GroupData> before = app.group().all();
+    GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .whithId(before.get(index).getId()).whithName("Август").whithHeader("Раш").whithFooter("Хаш");
-    app.group().modify(index, group);
-    List<GroupData> after = app.group().list();
+            .whithId(modifiedGroup.getId()).whithName("Август").whithHeader("Раш").whithFooter("Хаш");
+    app.group().modify(group);
+    Set<GroupData> after = app.group().all();
     Assert.assertEquals(before.size(), after.size());
 
 
-    before.remove(index);
+    before.remove(modifiedGroup);
     before.add(group);
-    Comparator<? super GroupData> byId = ((o1, o2) -> Integer.compare(o1.getId(), o2.getId()));
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
 
   }

@@ -65,7 +65,7 @@ public class ApplcationManager {
     return accountHelper;
   }
 
-/*  public SessionHelper getSessionHelper() {
+  public SessionHelper getSessionHelper() {
     return sessionHelper;
-  } */
+  }
 }

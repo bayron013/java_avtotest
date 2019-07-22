@@ -25,16 +25,14 @@ public class HelperBase {
       }
     }
   }
-/*
-  public boolean isAlertPresent() {
+/* public boolean isAlertPresent() {
     try {
       wd.switchTo().alert();
       return true;
     } catch (NoAlertPresentException e) {
       return false;
     }
-  }
-*/
+  } не понятная часть кода, нигде явно не используется*/
 
   public boolean isElementPresent(By locator) {
     try {

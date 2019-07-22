@@ -5,14 +5,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class AccountUpdateTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.account().list().size() == 0) {
+    if (app.account().all().size() == 0) {
       app.account().create(new AccountFields()
               .whithFirstname("Michael").whithLastname("Alexandrovich").whithNickname("Gorilla777")
               .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home"), false);
@@ -22,25 +21,22 @@ public class AccountUpdateTests extends TestBase{
   @Test
   public void testAccountUpdate() throws Exception{
 
-    List<AccountFields> before = app.account().list();
-    int index = before.size() - 1;
+    Set<AccountFields> before = app.account().all();
+    AccountFields modifiedAccount = before.iterator().next();
     AccountFields account = new AccountFields()
-            .whithId(before.get(index).getId()).whithFirstname("Виктор").whithLastname("Саныч")
+            .whithId(modifiedAccount.getId()).whithFirstname("Виктор").whithLastname("Саныч")
             .whithNickname("Goblin").whithTitlearea("title").whithCompany("Volkswagen").whithAddress("Russia")
             .whithHome("Sweet Home").whithMobilenumber("81117775511").whithAboutworkfield("Work Hard")
             .whithFax("none").whithFirstEmail("none").whithSecondEmail("@gmail.com").whithThirdEmail("@rabler.loh")
             .whithHomepage("vk.ru");
-    app.account().modify(index, account);
+    app.account().modify(account);
+// придумать способ для выбора модифицируемого аккаунта при помощи id
     app.goTo().homePage();
-    List<AccountFields> after = app.account().list();
+    Set<AccountFields> after = app.account().all();
     Assert.assertEquals(after.size(), before.size());
 
-    before.remove(index);
+    before.remove(modifiedAccount);
     before.add(account);
-
-    Comparator<? super AccountFields> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
     Assert.assertEquals(before, after);
 
   }
