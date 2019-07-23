@@ -76,6 +76,7 @@ public class AccountHelper extends HelperBase{
   public void deleteSelectedAccount() {
     click(By.xpath("//input[@value='Delete']"));
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 // проблема с выбором групп для модификации
   public void editAccountById(int id) {

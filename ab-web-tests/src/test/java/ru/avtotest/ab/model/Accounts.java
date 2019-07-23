@@ -32,7 +32,7 @@ public class Accounts extends ForwardingSet<AccountFields> {
 
   public Accounts withoutAc (AccountFields account) {
     Accounts accounts = new Accounts(this);
-    accounts.add(account);
+    accounts.remove(account);
     return accounts;
   }
 
