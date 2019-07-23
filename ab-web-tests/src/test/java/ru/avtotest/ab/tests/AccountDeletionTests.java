@@ -1,11 +1,13 @@
 package ru.avtotest.ab.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
+import ru.avtotest.ab.model.Accounts;
 
-import java.util.Set;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class AccountDeletionTests extends TestBase{
 
@@ -20,14 +22,11 @@ public class AccountDeletionTests extends TestBase{
 
   @Test
   public void testAccountDeletion(){
-    Set<AccountFields> before = app.account().all();
+    Accounts before = app.account().all();
     AccountFields deletedAccount = before.iterator().next();
     app.account().delete(deletedAccount);
-    Set<AccountFields> after = app.account().all();
-    Assert.assertEquals(after.size(), before.size() - 1);
-
-    before.remove(deletedAccount);
-    Assert.assertEquals(before, after);
-
+    Accounts after = app.account().all();
+    assertEquals(after.size(), before.size() - 1);
+    assertThat(after, equalTo(before.withoutAc(deletedAccount)));
   }
 }

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.avtotest.ab.model.AccountFields;
+import ru.avtotest.ab.model.Accounts;
 
 import java.util.HashSet;
 import java.util.List;
@@ -77,16 +78,16 @@ public class AccountHelper extends HelperBase{
     wd.switchTo().alert().accept();
   }
 // проблема с выбором групп для модификации
-  public void edit(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void editAccountById(int id) {
+    wd.findElement(By.xpath("//a[@href='edit.php?id=" + id + "']")).click();
   }
 
-  public void editAccountById(int id) {
+  public void selectAccountById(int id) {
     wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
   public void delete(AccountFields account) {
-    editAccountById(account.getId());
+    selectAccountById(account.getId());
     deleteSelectedAccount();
     tohomepage();
   }
@@ -111,16 +112,17 @@ public class AccountHelper extends HelperBase{
     fillAccountForm(account, false);
     setBDaydata("6", "October", "1989");
     updateAccount();
+    tohomepage();
   }
 
-  public Set<AccountFields> all() {
-    Set<AccountFields> accounts = new HashSet<AccountFields>();
+  public Accounts all() {
+    Accounts accounts = new Accounts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.xpath
               (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
-      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
+      String firstname = element.findElement(By.xpath(".//td[3]")).getText();
       AccountFields account = new AccountFields().whithId(id).whithFirstname(firstname).whithLastname(lastname);
       accounts.add(account);
     }
