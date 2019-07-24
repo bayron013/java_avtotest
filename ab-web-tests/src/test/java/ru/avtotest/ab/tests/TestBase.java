@@ -7,7 +7,7 @@ import ru.avtotest.ab.appmanager.ApplcationManager;
 
 public class TestBase {
 
-  protected static final ApplcationManager app = new ApplcationManager(BrowserType.CHROME);
+  protected static final ApplcationManager app = new ApplcationManager(BrowserType.FIREFOX);
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {

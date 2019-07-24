@@ -12,8 +12,8 @@ public class AccountFields {
   private String company;
   private String address;
   private String home;
-  private String mobilenumber;
-  private String aboutworkfield;
+  private String mobile;
+  private String work;
   private String fax;
   private String firstEmail;
   private String secondEmail;
@@ -65,13 +65,13 @@ public class AccountFields {
     return this;
   }
 
-  public AccountFields whithMobilenumber(String mobilenumber) {
-    this.mobilenumber = mobilenumber;
+  public AccountFields whithMobile(String mobilenumber) {
+    this.mobile = mobilenumber;
     return this;
   }
 
-  public AccountFields whithAboutworkfield(String aboutworkfield) {
-    this.aboutworkfield = aboutworkfield;
+  public AccountFields whithWork(String aboutworkfield) {
+    this.work = aboutworkfield;
     return this;
   }
 
@@ -136,12 +136,12 @@ public class AccountFields {
     return home;
   }
 
-  public String getMobilenumber() {
-    return mobilenumber;
+  public String getMobile() {
+    return mobile;
   }
 
-  public String getAboutworkfield() {
-    return aboutworkfield;
+  public String getWork() {
+    return work;
   }
 
   public String getFax() {

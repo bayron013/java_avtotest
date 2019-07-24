@@ -7,7 +7,6 @@ import ru.avtotest.ab.model.Accounts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class AccountUpdateTests extends TestBase{
 
@@ -28,12 +27,12 @@ public class AccountUpdateTests extends TestBase{
     AccountFields account = new AccountFields()
             .whithId(modifiedAccount.getId()).whithFirstname("Геннадий").whithLastname("Геннадьевич")
             .whithNickname("Goblin").whithTitlearea("title").whithCompany("Volkswagen").whithAddress("Russia")
-            .whithHome("Sweet Home").whithMobilenumber("81117775511").whithAboutworkfield("Work Hard")
+            .whithHome("Sweet Home").whithMobile("81117775511").whithWork("Work Hard")
             .whithFax("none").whithFirstEmail("none").whithSecondEmail("@gmail.com").whithThirdEmail("@rabler.loh")
             .whithHomepage("vk.ru");
     app.account().modify(account);
+    assertThat(app.account().count(), equalTo(before.size()));
     Accounts after = app.account().all();
-    assertEquals(after.size(), before.size());
     assertThat(after, equalTo(before.withoutAc(modifiedAccount).withAc(account)));
   }
 

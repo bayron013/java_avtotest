@@ -7,7 +7,6 @@ import ru.avtotest.ab.model.Accounts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class AccountDeletionTests extends TestBase{
 
@@ -25,8 +24,8 @@ public class AccountDeletionTests extends TestBase{
     Accounts before = app.account().all();
     AccountFields deletedAccount = before.iterator().next();
     app.account().delete(deletedAccount);
+    assertThat(app.account().count(), equalTo(before.size() - 1));
     Accounts after = app.account().all();
-    assertEquals(after.size(), before.size() - 1);
     assertThat(after, equalTo(before.withoutAc(deletedAccount)));
   }
 }
