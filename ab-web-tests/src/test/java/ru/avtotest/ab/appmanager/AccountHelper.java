@@ -133,13 +133,12 @@ public class AccountHelper extends HelperBase{
               (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
-      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
-      String[] emails = element.findElement(By.xpath(".//td[5]")).getText().split("\n");
+      String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+      String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
       String address = element.findElement(By.xpath(".//td[4]")).getText();
       AccountFields account = new AccountFields().whithId(id).whithFirstname(firstname)
-              .whithLastname(lastname).whithHome(phones[0]).whithMobile(phones[1])
-              .whithWork(phones[2]).whithFirstEmail(emails[0]).whithSecondEmail(emails[1])
-              .whithThirdEmail(emails[2]).whithAddress(address);
+              .whithLastname(lastname).whithAllPhones(allPhones)
+              .whithAllEmails(allEmails).whithAddress(address);
       accountCache.add(account);
     }
     return new Accounts(accountCache);

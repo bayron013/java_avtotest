@@ -19,6 +19,18 @@ public class AccountFields {
   private String secondEmail;
   private String thirdEmail;
   private String homepage;
+  private String allPhones;
+  private String allEmails;
+
+  public AccountFields whithAllEmails(String allEmails) {
+    this.allEmails = allEmails;
+    return this;
+  }
+
+  public AccountFields whithAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
 
   public AccountFields whithId(int id) {
     this.id = id;
@@ -98,6 +110,14 @@ public class AccountFields {
   public AccountFields whithHomepage(String homepage) {
     this.homepage = homepage;
     return this;
+  }
+
+  public String getAllEmails() {
+    return allEmails;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
   public int getId() {
