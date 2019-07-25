@@ -133,10 +133,13 @@ public class AccountHelper extends HelperBase{
               (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
-      String[] phones = element.findElement(By.xpath(".//td[5]")).getText().split("\n");
+      String[] phones = element.findElement(By.xpath(".//td[6]")).getText().split("\n");
+      String[] emails = element.findElement(By.xpath(".//td[5]")).getText().split("\n");
+      String address = element.findElement(By.xpath(".//td[4]")).getText();
       AccountFields account = new AccountFields().whithId(id).whithFirstname(firstname)
               .whithLastname(lastname).whithHome(phones[0]).whithMobile(phones[1])
-              .whithWork(phones[2]);
+              .whithWork(phones[2]).whithFirstEmail(emails[0]).whithSecondEmail(emails[1])
+              .whithThirdEmail(emails[2]).whithAddress(address);
       accountCache.add(account);
     }
     return new Accounts(accountCache);
@@ -149,22 +152,28 @@ public class AccountHelper extends HelperBase{
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    String address = wd.findElement(By.name("address")).getAttribute("value");
     wd.navigate().back();
     return new AccountFields().whithId(account.getId()).whithFirstname(firstname)
             .whithLastname(lastname).whithHome(home).whithMobile(mobile)
-            .whithWork(work);
+            .whithWork(work).whithFirstEmail(email).whithSecondEmail(email2)
+            .whithThirdEmail(email3).whithAddress(address);
   }
 
   private void initAccountModificationById(int id) {
-    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s'", id)));
+/*    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s'", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("id"));
     cells.get(7).findElement(By.tagName("a")).click();
-/*  В этом методе каждый способ нацелен на одну цель переход на форму модификации аккаунта
-    по кнопке Edit, при помощи уникального идентификатора. Первый способ оставлю на виду,
+  В этом методе каждый способ нацелен на одну цель - переход на форму модификации аккаунта
+    по кнопке Edit, при помощи уникального идентификатора. Один способ оставлю на виду,
     остальные 3 закомментирую вместе с этим текстом
-    1)wd.findElement(By.xpath((String.format("//input[@value='%s']/../../td[8]/a", id)))).click();
-    2)wd.findElement(By.xpath((String.format("//tr[.//input[@value='%s']/td[8]/a", id)))).click();
+    1) */
+    wd.findElement(By.xpath((String.format("//input[@value='%s']/../../td[8]/a", id)))).click();
+/*    2)wd.findElement(By.xpath((String.format("//tr[.//input[@value='%s']/td[8]/a", id)))).click();
     3)wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
     (Шпаргалка):
     В языке запросов Xpath нумерация начинается с еденицы! (1)
