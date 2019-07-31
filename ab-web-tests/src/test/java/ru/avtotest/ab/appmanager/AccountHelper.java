@@ -58,7 +58,7 @@ public class AccountHelper extends HelperBase{
     type(By.name("homepage"), accountFields.getHomepage());
     attach(By.name("photo"), accountFields.getPhoto());
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Группировка");
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Август");
 
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
