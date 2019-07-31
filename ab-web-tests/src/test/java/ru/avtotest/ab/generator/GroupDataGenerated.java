@@ -13,7 +13,7 @@ import java.util.List;
 public class GroupDataGenerated {
 
   public static void main (String[] args) throws IOException {
-    int count = Integer.parseInt(args[0]);
+    int count = Integer.parseInt(args[8]);
     File file = new File(args[1]);
 
     List<GroupData> groups = generateGroups(count);
@@ -31,7 +31,7 @@ public class GroupDataGenerated {
 
   private static List<GroupData> generateGroups(int count) {
     List<GroupData>  groups = new ArrayList<GroupData>();
-    for (int i = 0; 1 < count; i++) {
+    for (int i = 0; i < count; i++) {
       groups.add(new GroupData().whithName(String.format("Test %s", i))
               .whithHeader(String.format("header %s", i))
               .whithFooter(String.format("footer %s", i)));
