@@ -38,7 +38,7 @@ public class AccountCreationTests extends TestBase {
   @Test(dataProvider = "validAccounts")
   public void testAccountCreation(AccountFields account) {
     Accounts before = app.account().all();
-    File photo = new File("src/test/resources/грек.jpg");
+//    File photo = new File("src/test/resources/грек.jpg");
     app.account().create(account, true);
     assertThat(app.account().count(), equalTo(before.size() + 1));
     Accounts after = app.account().all();
