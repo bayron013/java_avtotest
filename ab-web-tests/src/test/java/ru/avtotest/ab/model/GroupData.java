@@ -1,5 +1,6 @@
 package ru.avtotest.ab.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class GroupData {
@@ -7,6 +8,16 @@ public class GroupData {
   private String name;
   private String header;
   private String footer;
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public GroupData whithPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public GroupData whithId(int id) {
     this.id = id;
