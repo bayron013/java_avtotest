@@ -14,7 +14,7 @@ public class GroupDeletionTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().whithName("Запасной вариант"));
+      app.group().create(new GroupData().withName("Запасной вариант"));
     }
   }
 

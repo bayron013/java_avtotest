@@ -15,7 +15,7 @@ public class GroupUpdateTests extends TestBase{
   public void ensurePreconditions() {
     app.goTo().groupPage();
     if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().whithName("Группа рас"));
+      app.group().create(new GroupData().withName("Группа рас"));
     }
   }
 
@@ -24,7 +24,7 @@ public class GroupUpdateTests extends TestBase{
     Groups before = app.group().all();
     GroupData modifiedGroup = before.iterator().next();
     GroupData group = new GroupData()
-            .whithId(modifiedGroup.getId()).whithName("Август").whithHeader("Раш").whithFooter("Хаш");
+            .whithId(modifiedGroup.getId()).withName("Август").withHeader("Раш").withFooter("Хаш");
     app.group().modify(group);
     assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();

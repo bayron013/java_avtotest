@@ -24,17 +24,17 @@ public class GroupData {
     return this;
   }
 
-  public GroupData whithName(String name) {
+  public GroupData withName(String name) {
     this.name = name;
     return this;
   }
 
-  public GroupData whithHeader(String header) {
+  public GroupData withHeader(String header) {
     this.header = header;
     return this;
   }
 
-  public GroupData whithFooter(String footer) {
+  public GroupData withFooter(String footer) {
     this.footer = footer;
     return this;
   }
