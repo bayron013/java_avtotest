@@ -1,5 +1,6 @@
 package ru.avtotest.ab.model;
 
+import java.io.File;
 import java.util.Objects;
 
 public class AccountFields {
@@ -21,6 +22,16 @@ public class AccountFields {
   private String homepage;
   private String allPhones;
   private String allEmails;
+  private File photo;
+
+  public File getPhoto() {
+    return photo;
+  }
+
+  public AccountFields withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   public AccountFields whithAllEmails(String allEmails) {
     this.allEmails = allEmails;

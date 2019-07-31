@@ -56,6 +56,7 @@ public class AccountHelper extends HelperBase{
     type(By.name("email2"), accountFields.getSecondEmail());
     type(By.name("email3"), accountFields.getThirdEmail());
     type(By.name("homepage"), accountFields.getHomepage());
+    attach(By.name("photo"), accountFields.getPhoto());
     if (creation){
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Группировка");
 
