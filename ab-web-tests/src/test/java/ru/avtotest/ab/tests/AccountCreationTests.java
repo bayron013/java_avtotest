@@ -25,35 +25,35 @@ public class AccountCreationTests extends TestBase {
 
   @DataProvider
   public Iterator<Object[]> validAccountsFromXml() throws IOException {
-    List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader
-            (new File("src/test/resources/accounts.xml")));
-    String xml = "";
-    String line = reader.readLine();
-    while (line != null) {
-      xml += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader
+            (new File("src/test/resources/accounts.xml")))) {
+      String xml = "";
+      String line = reader.readLine();
+      while (line != null) {
+        xml += line;
+        line = reader.readLine();
+      }
+      XStream xstream = new XStream();
+      xstream.processAnnotations(AccountFields.class);
+      List<AccountFields> accounts = (List<AccountFields>) xstream.fromXML(xml);
+      return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
-    XStream xstream = new XStream();
-    xstream.processAnnotations(AccountFields.class);
-    List<AccountFields> accounts = (List<AccountFields>) xstream.fromXML(xml);
-    return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
   @DataProvider
   public Iterator<Object[]> validAccountsFromJson() throws IOException {
-    List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader
-            (new File("src/test/resources/accounts.json")));
-    String json = "";
-    String line = reader.readLine();
-    while (line != null) {
-      json += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader
+            (new File("src/test/resources/accounts.json")))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<AccountFields> accounts = gson.fromJson(json, new TypeToken<List<AccountFields>>(){}.getType());   //List<AccountFields>.class
+      return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<AccountFields> accounts = gson.fromJson(json, new TypeToken<List<AccountFields>>(){}.getType());   //List<AccountFields>.class
-    return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
   @Test(dataProvider = "validAccountsFromJson")

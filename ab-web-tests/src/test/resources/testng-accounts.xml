@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+    <test name="Accounts">
+        <classes>
+            <class name="ru.avtotest.ab.tests.AccountCreationTests" />
+            <class name="ru.avtotest.ab.tests.AccountUpdateTests" />
+            <class name="ru.avtotest.ab.tests.AccountDeletionTests" />
+        </classes>
+    </test>
+</suite>

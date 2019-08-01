@@ -55,31 +55,31 @@ public class AccountFieldGeneretor {
     Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
             .create();
     String json = gson.toJson(accounts);
-    Writer writer = new FileWriter(file);
-    writer.write(json);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(json);
+    }
   }
 
   private void saveAsXml(List<AccountFields> accounts, File file) throws IOException {
     XStream xStream = new XStream();
     xStream.processAnnotations(AccountFields.class);
     String xml = xStream.toXML(accounts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
+    try (Writer writer = new FileWriter(file)) {
+      writer.write(xml);
+    }
   }
 
   private void saveAsCsv(List<AccountFields> accounts, File file) throws IOException {
-    Writer writer = new FileWriter(file);
-    for (AccountFields account : accounts) {
-      writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", account.getFirstname(),
-              account.getMiddlename(), account.getLastname(), account.getNickname(),
-              account.getTitlearea(), account.getCompany(), account.getAddress(),
-              account.getHome(), account.getMobile(), account.getWork(), account.getFax(),
-              account.getFirstEmail(), account.getSecondEmail(), account.getThirdEmail(),
-              account.getHomepage()));
+    try (Writer writer = new FileWriter(file)) {
+      for (AccountFields account : accounts) {
+        writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", account.getFirstname(),
+                account.getMiddlename(), account.getLastname(), account.getNickname(),
+                account.getTitlearea(), account.getCompany(), account.getAddress(),
+                account.getHome(), account.getMobile(), account.getWork(), account.getFax(),
+                account.getFirstEmail(), account.getSecondEmail(), account.getThirdEmail(),
+                account.getHomepage()));
+      }
     }
-    writer.close();
   }
 
   private List<AccountFields> generateAccounts(int count) {
