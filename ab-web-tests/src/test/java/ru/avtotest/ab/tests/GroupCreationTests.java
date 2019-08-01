@@ -33,8 +33,7 @@ public class GroupCreationTests extends TestBase {
     XStream xstream = new XStream();
     xstream.processAnnotations(GroupData.class);
     List<GroupData> groups = (List<GroupData>) xstream.fromXML(xml);
-    groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
-    return list.iterator();
+    return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
   @Test(dataProvider = "validGroups")
