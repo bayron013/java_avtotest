@@ -1,24 +1,46 @@
 package ru.avtotest.ab.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+
+@XStreamAlias("account")
 public class AccountFields {
+  @XStreamOmitField
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String firstname;
+  @Expose
   private String middlename;
+  @Expose
   private String lastname;
+  @Expose
   private String nickname;
+  @Expose
   private String titlearea;
+  @Expose
   private String company;
+  @Expose
   private String address;
+  @Expose
   private String home;
+  @Expose
   private String mobile;
+  @Expose
   private String work;
+  @Expose
   private String fax;
+  @Expose
   private String firstEmail;
+  @Expose
   private String secondEmail;
+  @Expose
   private String thirdEmail;
+  @Expose
   private String homepage;
   private String allPhones;
   private String allEmails;

@@ -1,9 +1,13 @@
 package ru.avtotest.ab.tests;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.thoughtworks.xstream.XStream;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 import ru.avtotest.ab.model.Accounts;
+import ru.avtotest.ab.model.GroupData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -19,23 +24,39 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AccountCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validAccounts() throws IOException {
+  public Iterator<Object[]> validAccountsFromXml() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/accounts.csv")));
+    BufferedReader reader = new BufferedReader(new FileReader
+            (new File("src/test/resources/accounts.xml")));
+    String xml = "";
     String line = reader.readLine();
     while (line != null) {
-      String[] split = line.split(";");
-      list.add(new Object[] {new AccountFields().whithFirstname(split[0]).whithMiddlename(split[1])
-              .whithLastname(split[2]).whithNickname(split[3]).whithTitlearea(split[4])
-              .whithCompany(split[5]).whithAddress(split[6]).whithHome(split[7])
-              .whithMobile(split[8]).whithWork(split[9]).whithFax(split[10]).whithFirstEmail(split[11])
-              .whithSecondEmail(split[12]).whithThirdEmail(split[13]).whithHomepage(split[14])});
+      xml += line;
       line = reader.readLine();
     }
-    return list.iterator();
+    XStream xstream = new XStream();
+    xstream.processAnnotations(AccountFields.class);
+    List<AccountFields> accounts = (List<AccountFields>) xstream.fromXML(xml);
+    return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-  @Test(dataProvider = "validAccounts")
+  @DataProvider
+  public Iterator<Object[]> validAccountsFromJson() throws IOException {
+    List<Object[]> list = new ArrayList<Object[]>();
+    BufferedReader reader = new BufferedReader(new FileReader
+            (new File("src/test/resources/accounts.json")));
+    String json = "";
+    String line = reader.readLine();
+    while (line != null) {
+      json += line;
+      line = reader.readLine();
+    }
+    Gson gson = new Gson();
+    List<AccountFields> accounts = gson.fromJson(json, new TypeToken<List<AccountFields>>(){}.getType());   //List<AccountFields>.class
+    return accounts.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
+  }
+
+  @Test(dataProvider = "validAccountsFromJson")
   public void testAccountCreation(AccountFields account) {
     Accounts before = app.account().all();
 //    File photo = new File("src/test/resources/грек.jpg");

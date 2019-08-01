@@ -3,8 +3,10 @@ package ru.avtotest.ab.generator;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.thoughtworks.xstream.XStream;
 import ru.avtotest.ab.model.AccountFields;
-import ru.avtotest.ab.model.GroupData;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,6 +23,9 @@ public class AccountFieldGeneretor {
   @Parameter(names = "-f", description = "Target file")
   public String file;
 
+  @Parameter(names = "-d", description = "Data format")
+  public String format;
+
   public static void main (String[] args) throws IOException {
     AccountFieldGeneretor generator = new AccountFieldGeneretor();
     JCommander jComander = new JCommander(generator);
@@ -35,10 +40,36 @@ public class AccountFieldGeneretor {
 
   private void run() throws IOException {
     List<AccountFields> accounts = generateAccounts(count);
-    save(accounts, new File(file));
+    if (format.equals("csv")) {
+      saveAsCsv(accounts, new File(file));
+    } else if (format.equals("xml")) {
+      saveAsXml(accounts, new File(file));
+    } else if (format.equals("json")) {
+      saveAsJson(accounts, new File(file));
+    } else  {
+      System.out.println("Unrecignized format " + format);
+    }
   }
 
-  private void save(List<AccountFields> accounts, File file) throws IOException {
+  private void saveAsJson(List<AccountFields> accounts, File file) throws IOException {
+    Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation()
+            .create();
+    String json = gson.toJson(accounts);
+    Writer writer = new FileWriter(file);
+    writer.write(json);
+    writer.close();
+  }
+
+  private void saveAsXml(List<AccountFields> accounts, File file) throws IOException {
+    XStream xStream = new XStream();
+    xStream.processAnnotations(AccountFields.class);
+    String xml = xStream.toXML(accounts);
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
+  }
+
+  private void saveAsCsv(List<AccountFields> accounts, File file) throws IOException {
     Writer writer = new FileWriter(file);
     for (AccountFields account : accounts) {
       writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s\n", account.getFirstname(),
