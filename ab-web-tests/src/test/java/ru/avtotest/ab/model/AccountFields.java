@@ -3,55 +3,114 @@ package ru.avtotest.ab.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Objects;
 
 
 @XStreamAlias("account")
+@Entity
+@Table(name = "addressbook")
 public class AccountFields {
+
   @XStreamOmitField
+  @Id
+  @Column(name = "id")
   private int id = Integer.MAX_VALUE;
+
   @Expose
+  @Column(name = "firstname")
+  @Type(type = "text")
   private String firstname;
+
   @Expose
+  @Column(name = "middlename")
+  @Type(type = "text")
   private String middlename;
+
   @Expose
+  @Column(name = "lastname")
+  @Type(type = "text")
   private String lastname;
+
   @Expose
+  @Column(name = "nickname")
+  @Type(type = "text")
   private String nickname;
+
   @Expose
+  @Column(name = "title")
+  @Type(type = "text")
   private String titlearea;
+
   @Expose
+  @Column(name = "company")
+  @Type(type = "longtext") // тут возникает ошибка: Unable to load class [longtext]
   private String company;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
   @Expose
+  @Column(name = "home")
+  @Type(type = "text")
   private String home;
+
   @Expose
+  @Column(name = "mobile")
+  @Type(type = "text")
   private String mobile;
+
   @Expose
+  @Column(name = "work")
+  @Type(type = "text")
   private String work;
+
   @Expose
+  @Column(name = "fax")
+  @Type(type = "text")
   private String fax;
+
   @Expose
+  @Column(name = "email")
+  @Type(type = "text")
   private String firstEmail;
+
   @Expose
+  @Column(name = "email2")
+  @Type(type = "text")
   private String secondEmail;
+
   @Expose
+  @Column(name = "email3")
+  @Type(type = "text")
   private String thirdEmail;
+
   @Expose
+  @Column(name = "homepage")
+  @Type(type = "text")
   private String homepage;
+
+  @Transient
   private String allPhones;
+
+  @Transient
   private String allEmails;
-  private File photo;
+
+  @Column(name = "photo")
+  @Type(type = "text")
+  private String photo;
 
   public File getPhoto() {
-    return photo;
+    return new File(photo);
   }
 
   public AccountFields withPhoto(File photo) {
-    this.photo = photo;
+    this.photo = photo.getPath();
     return this;
   }
 
