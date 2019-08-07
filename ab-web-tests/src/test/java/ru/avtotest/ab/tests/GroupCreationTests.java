@@ -12,7 +12,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,6 +62,6 @@ public class GroupCreationTests extends TestBase {
     assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.group().all();
     assertThat(after, equalTo(before.withAdded(
-            group.whithId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+            group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }

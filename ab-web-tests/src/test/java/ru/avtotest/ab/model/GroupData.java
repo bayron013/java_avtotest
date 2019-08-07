@@ -28,7 +28,7 @@ public class GroupData {
     return this;
   }
 
-  public GroupData whithId(int id) {
+  public GroupData withId(int id) {
     this.id = id;
     return this;
   }
