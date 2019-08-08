@@ -7,13 +7,11 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 import ru.avtotest.ab.model.Accounts;
-import ru.avtotest.ab.model.GroupData;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,12 +56,12 @@ public class AccountCreationTests extends TestBase {
 
   @Test(dataProvider = "validAccountsFromJson")
   public void testAccountCreation(AccountFields account) {
-    Accounts before = app.account().all();
-//    File photo = new File("src/test/resources/грек.jpg");
+    Accounts before = app.db().accounts();
+    File photo = new File("src/test/resources/грек.jpg");
     app.account().create(account, true);
     assertThat(app.account().count(), equalTo(before.size() + 1));
-    Accounts after = app.account().all();
-    assertThat(after, equalTo(before.withAc(account.whithId(
+    Accounts after = app.db().accounts();
+    assertThat(after, equalTo(before.withAddedAc(account.whithId(
             after.stream().mapToInt((a) -> a.getId()).max().getAsInt()))));
   }
 

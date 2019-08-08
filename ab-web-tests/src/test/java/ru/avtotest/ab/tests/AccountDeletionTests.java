@@ -12,7 +12,7 @@ public class AccountDeletionTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
-    if (app.account().all().size() == 0) {
+    if (app.db().accounts().size() == 0) {
       app.account().create(new AccountFields()
               .whithFirstname("Michael").whithLastname("Alexandrovich").whithNickname("Gorilla777")
               .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home"), false);
@@ -21,11 +21,11 @@ public class AccountDeletionTests extends TestBase{
 
   @Test
   public void testAccountDeletion(){
-    Accounts before = app.account().all();
+    Accounts before = app.db().accounts();
     AccountFields deletedAccount = before.iterator().next();
     app.account().delete(deletedAccount);
     assertThat(app.account().count(), equalTo(before.size() - 1));
-    Accounts after = app.account().all();
+    Accounts after = app.db().accounts();
     assertThat(after, equalTo(before.withoutAc(deletedAccount)));
   }
 }

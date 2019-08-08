@@ -22,32 +22,26 @@ public class AccountFields {
 
   @Expose
   @Column(name = "firstname")
-  @Type(type = "text")
   private String firstname;
 
   @Expose
   @Column(name = "middlename")
-  @Type(type = "text")
   private String middlename;
 
   @Expose
   @Column(name = "lastname")
-  @Type(type = "text")
   private String lastname;
 
   @Expose
   @Column(name = "nickname")
-  @Type(type = "text")
   private String nickname;
 
   @Expose
   @Column(name = "title")
-  @Type(type = "text")
   private String titlearea;
 
   @Expose
   @Column(name = "company")
-  @Type(type = "longtext") // тут возникает ошибка: Unable to load class [longtext]
   private String company;
 
   @Expose
@@ -106,7 +100,11 @@ public class AccountFields {
   private String photo;
 
   public File getPhoto() {
-    return new File(photo);
+    if (photo == null) {
+      return null;
+    } else {
+      return new File(photo);
+    }
   }
 
   public AccountFields withPhoto(File photo) {
@@ -283,12 +281,26 @@ public class AccountFields {
     AccountFields that = (AccountFields) o;
     return id == that.id &&
             Objects.equals(firstname, that.firstname) &&
-            Objects.equals(lastname, that.lastname);
+            Objects.equals(middlename, that.middlename) &&
+            Objects.equals(lastname, that.lastname) &&
+            Objects.equals(nickname, that.nickname) &&
+            Objects.equals(titlearea, that.titlearea) &&
+            Objects.equals(company, that.company) &&
+            Objects.equals(address, that.address) &&
+            Objects.equals(home, that.home) &&
+            Objects.equals(mobile, that.mobile) &&
+            Objects.equals(work, that.work) &&
+            Objects.equals(fax, that.fax) &&
+            Objects.equals(firstEmail, that.firstEmail) &&
+            Objects.equals(secondEmail, that.secondEmail) &&
+            Objects.equals(thirdEmail, that.thirdEmail) &&
+            Objects.equals(homepage, that.homepage) &&
+            Objects.equals(photo, that.photo);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
+    return Objects.hash(id, firstname, middlename, lastname, nickname, titlearea, company, address, home, mobile, work, fax, firstEmail, secondEmail, thirdEmail, homepage, photo);
   }
 
   @Override

@@ -2,7 +2,9 @@ package ru.avtotest.ab.model;
 
 import com.google.common.collect.ForwardingSet;
 
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Accounts extends ForwardingSet<AccountFields> {
@@ -18,12 +20,16 @@ public class Accounts extends ForwardingSet<AccountFields> {
     this.delegate = new HashSet<AccountFields>();
   }
 
+  public Accounts(Collection<AccountFields> accounts) {
+    this.delegate = new HashSet<AccountFields>(accounts);
+  }
+
   @Override
   protected Set<AccountFields> delegate() {
     return delegate;
   }
 
-  public Accounts withAc (AccountFields account) {
+  public Accounts withAddedAc(AccountFields account) {
     Accounts accounts = new Accounts(this);
     accounts.add(account);
     return accounts;
