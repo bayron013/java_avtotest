@@ -85,21 +85,21 @@ public class AccountFieldGeneretor {
   private List<AccountFields> generateAccounts(int count) {
     List<AccountFields>  accounts = new ArrayList<AccountFields>();
     for (int i = 0; i < count; i++) {
-      accounts.add(new AccountFields().whithFirstname(String.format("firstame %s", i))
-              .whithMiddlename(String.format("middlename %s", i))
-              .whithLastname(String.format("lastname %s", i))
-              .whithNickname(String.format("nickname %s", i))
-              .whithTitlearea(String.format("titlearea %s", i))
-              .whithCompany(String.format("company %s", i))
-              .whithAddress(String.format("address %s", i))
-              .whithHome(String.format("homephone %s", i))
-              .whithMobile(String.format("mobilephone %s", i))
-              .whithWork(String.format("workphone %s", i))
-              .whithFax(String.format("fax %s", i))
-              .whithFirstEmail(String.format("firstemail %s", i))
-              .whithSecondEmail(String.format("secondemail %s", i))
-              .whithThirdEmail(String.format("thirdemail %s", i))
-              .whithHomepage(String.format("homepage %s", i)));
+      accounts.add(new AccountFields().whithFirstname(String.format("firstame %s\n", i))
+              .whithMiddlename(String.format("middlename %s\n", i))
+              .whithLastname(String.format("lastname %s\n", i))
+              .whithNickname(String.format("nickname %s\n", i))
+              .whithTitlearea(String.format("titlearea %s\n", i))
+              .whithCompany(String.format("company %s\n", i))
+              .whithAddress(String.format("address %s\n", i))
+              .whithHome(String.format("homephone %s\n", i))
+              .whithMobile(String.format("mobilephone %s\n", i))
+              .whithWork(String.format("workphone %s\n", i))
+              .whithFax(String.format("fax %s\n", i))
+              .whithFirstEmail(String.format("firstemail %s\n", i))
+              .whithSecondEmail(String.format("secondemail %s\n", i))
+              .whithThirdEmail(String.format("thirdemail %s\n", i))
+              .whithHomepage(String.format("homepage %s\n", i)));
     }
     return accounts;
   }
