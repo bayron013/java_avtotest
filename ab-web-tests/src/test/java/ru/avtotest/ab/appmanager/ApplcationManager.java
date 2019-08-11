@@ -83,4 +83,5 @@ public class ApplcationManager {
   public DbHelper db() {
     return dbHelper;
   }
+
 }

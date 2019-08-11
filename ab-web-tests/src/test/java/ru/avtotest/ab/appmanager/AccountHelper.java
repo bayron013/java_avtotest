@@ -58,8 +58,11 @@ public class AccountHelper extends HelperBase{
     type(By.name("homepage"), accountFields.getHomepage());
     attach(By.name("photo"), accountFields.getPhoto());
     if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText("Август");
-
+      if (accountFields.getGroups().size() > 0) {
+        Assert.assertTrue(accountFields.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(accountFields.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -134,12 +137,11 @@ public class AccountHelper extends HelperBase{
               (".//td[1]/input[@type='checkbox']")).getAttribute("value"));
       String lastname = element.findElement(By.xpath(".//td[2]")).getText();
       String firstname = element.findElement(By.xpath(".//td[3]")).getText();
-      String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
-      String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
+//      String allPhones = element.findElement(By.xpath(".//td[6]")).getText();
+//      String allEmails = element.findElement(By.xpath(".//td[5]")).getText();
       String address = element.findElement(By.xpath(".//td[4]")).getText();
       AccountFields account = new AccountFields().whithId(id).whithFirstname(firstname)
-              .whithLastname(lastname).whithAllPhones(allPhones)
-              .whithAllEmails(allEmails).whithAddress(address);
+              .whithLastname(lastname).whithAddress(address);
       accountCache.add(account);
     }
     return new Accounts(accountCache);
@@ -179,4 +181,26 @@ public class AccountHelper extends HelperBase{
     В языке запросов Xpath нумерация начинается с еденицы! (1)
 */
   }
+
+
+
+
+  public void goToEditGroupPage() {
+    wd.findElement(By.linkText("group page \"Август\"")).click();
+  }
+
+  public void editGropForAddAcc() {
+    wd.findElement(By.name("to_group")).click();
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("Август");
+    wd.findElement(By.name("to_group")).click();
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void editAccForAddToGroup(int id) {
+    wd.findElement(By.xpath((String.format("//input[@value='%s']/../../td[1]/a", id)))).click();
+  }
+
+
+
+
 }

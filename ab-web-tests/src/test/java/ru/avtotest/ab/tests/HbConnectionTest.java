@@ -38,10 +38,12 @@ public class HbConnectionTest {
     session.beginTransaction();
     List<AccountFields> result = session
             .createQuery("from AccountFields where deprecated = '0000-00-00'").list();
-    for (AccountFields account : result) {
-      System.out.println(account);
-    }
     session.getTransaction().commit();
     session.close();
+
+    for (AccountFields account : result) {
+      System.out.println(account);
+      System.out.println(account.getGroups());
+    }
   }
 }

@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.avtotest.ab.model.AccountFields;
 import ru.avtotest.ab.model.Accounts;
+import ru.avtotest.ab.model.GroupData;
+import ru.avtotest.ab.model.Groups;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -56,13 +58,20 @@ public class AccountCreationTests extends TestBase {
 
   @Test(dataProvider = "validAccountsFromJson")
   public void testAccountCreation(AccountFields account) {
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("Запасная группа"));
+      app.goTo().homePage();
+    }
+    Groups groups = app.db().groups();
     Accounts before = app.db().accounts();
     File photo = new File("src/test/resources/грек.jpg");
-    app.account().create(account, true);
+    app.account().create(account.inGroup(groups.iterator().next()), true);
     assertThat(app.account().count(), equalTo(before.size() + 1));
     Accounts after = app.db().accounts();
-    assertThat(after, equalTo(before.withAddedAc(account.whithId(
-            after.stream().mapToInt((a) -> a.getId()).max().getAsInt()))));
+    assertThat(after, equalTo(before.withAddedAc(account
+            .whithId(after.stream().mapToInt((a) -> a.getId()).max().getAsInt()))));
+    verifyAccountListInUi();
   }
 
   @Test(enabled = false)

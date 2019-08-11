@@ -27,5 +27,6 @@ public class AccountDeletionTests extends TestBase{
     assertThat(app.account().count(), equalTo(before.size() - 1));
     Accounts after = app.db().accounts();
     assertThat(after, equalTo(before.withoutAc(deletedAccount)));
+    verifyAccountListInUi();
   }
 }

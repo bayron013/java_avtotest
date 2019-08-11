@@ -22,12 +22,11 @@ public class AccountUpdateTests extends TestBase{
 
   @Test
   public void testAccountUpdate() throws Exception{
-
     Accounts before = app.db().accounts();
     AccountFields modifiedAccount = before.iterator().next();
     AccountFields account = new AccountFields()
             .whithId(modifiedAccount.getId()).whithFirstname("Геннадий").whithLastname("Геннадьевич")
-            .whithNickname("Goblin").whithTitlearea("title").whithCompany("Volkswagen")
+            .whithMiddlename("Геннадьев").whithNickname("Goblin").whithTitlearea("title").whithCompany("Volkswagen")
             .whithAddress("Russia").whithHome("Sweet Home").whithMobile("81117775511")
             .whithWork("Work Hard").whithFax("none").whithFirstEmail("none")
             .whithSecondEmail("@gmail.com").whithThirdEmail("- mail(  )@E-mail/")
@@ -36,6 +35,7 @@ public class AccountUpdateTests extends TestBase{
     assertThat(app.account().count(), equalTo(before.size()));
     Accounts after = app.db().accounts();
     assertThat(after, equalTo(before.withoutAc(modifiedAccount).withAddedAc(account)));
+    verifyAccountListInUi();
   }
 
 }

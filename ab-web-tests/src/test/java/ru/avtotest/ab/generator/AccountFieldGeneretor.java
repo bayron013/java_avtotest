@@ -91,7 +91,7 @@ public class AccountFieldGeneretor {
               .whithNickname(String.format("nickname %s", i))
               .whithTitlearea(String.format("titlearea %s", i))
               .whithCompany(String.format("company %s", i))
-              .whithAddress(String.format("address %s\n", i))
+              .whithAddress(String.format("address %s", i))
               .whithHome(String.format("homephone %s", i))
               .whithMobile(String.format("mobilephone %s", i))
               .whithWork(String.format("workphone %s", i))

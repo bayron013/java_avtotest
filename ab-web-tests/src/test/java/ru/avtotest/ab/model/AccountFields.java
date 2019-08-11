@@ -3,11 +3,14 @@ package ru.avtotest.ab.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @XStreamAlias("account")
@@ -88,6 +91,11 @@ public class AccountFields {
   @Column(name = "homepage")
   @Type(type = "text")
   private String homepage;
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"),
+          inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   @Transient
   private String allPhones;
@@ -274,6 +282,10 @@ public class AccountFields {
     return homepage;
   }
 
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -294,13 +306,13 @@ public class AccountFields {
             Objects.equals(firstEmail, that.firstEmail) &&
             Objects.equals(secondEmail, that.secondEmail) &&
             Objects.equals(thirdEmail, that.thirdEmail) &&
-            Objects.equals(homepage, that.homepage) &&
-            Objects.equals(photo, that.photo);
+            Objects.equals(homepage, that.homepage);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, middlename, lastname, nickname, titlearea, company, address, home, mobile, work, fax, firstEmail, secondEmail, thirdEmail, homepage, photo);
+    return Objects.hash(id, firstname, middlename, lastname, nickname, titlearea, company,
+            address, home, mobile, work, fax, firstEmail, secondEmail, thirdEmail, homepage);
   }
 
   @Override
@@ -309,7 +321,12 @@ public class AccountFields {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", address='" + address + '\'' +
             '}';
   }
 
+  public AccountFields inGroup(GroupData group) {
+    groups.add(group);
+    return this;
+  }
 }
