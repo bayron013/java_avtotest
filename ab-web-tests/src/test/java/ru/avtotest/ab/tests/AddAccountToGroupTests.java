@@ -37,7 +37,7 @@ public class AddAccountToGroupTests extends TestBase{
     AccountFields accountAdded = new AccountFields().whithId(findAccount.getId()).whithFirstname("Account Name")
             .whithLastname("Account Lastname").whithMiddlename("Account Middlename");
     app.account().addToGroup(accountAdded);
-    app.account().tohomepage();
+    app.account().toHomePage();
 
     assertThat(app.account().count(), equalTo(before.size()));
   }

@@ -8,9 +8,7 @@ import org.testng.Assert;
 import ru.avtotest.ab.model.AccountFields;
 import ru.avtotest.ab.model.Accounts;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class AccountHelper extends HelperBase{
 
@@ -37,7 +35,7 @@ public class AccountHelper extends HelperBase{
     wd.findElement(By.name("bmonth")).click();
     new Select(wd.findElement(By.name("bmonth"))).selectByVisibleText(dirthMonth);
     wd.findElement(By.name("bmonth")).click();
-    addfield(By.name("byear"), birthYear);
+    addField(By.name("byear"), birthYear);
   }
 
   public void fillAccountForm(AccountFields accountFields, boolean creation) {
@@ -68,7 +66,7 @@ public class AccountHelper extends HelperBase{
     }
   }
 
-  private void addfield(By locator, String text) {
+  private void addField(By locator, String text) {
     wd.findElement(locator).click();
     wd.findElement(locator).clear();
     wd.findElement(locator).sendKeys(text);
@@ -96,10 +94,10 @@ public class AccountHelper extends HelperBase{
     selectAccountById(account.getId());
     deleteSelectedAccount();
     accountCache = null;
-    tohomepage();
+    toHomePage();
   }
 
-  public void tohomepage() {
+  public void toHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
     }
@@ -112,7 +110,7 @@ public class AccountHelper extends HelperBase{
     setBDaydata("6", "October", "1989");
     submitAccount();
     accountCache = null;
-    tohomepage();
+    toHomePage();
   }
 
   public void modify(AccountFields account) {
@@ -121,7 +119,26 @@ public class AccountHelper extends HelperBase{
     setBDaydata("6", "October", "1989");
     updateAccount();
     accountCache = null;
-    tohomepage();
+    toHomePage();
+  }
+
+  public void addToGroup(AccountFields findAccount) {
+    selectAccountById(findAccount.getId());
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void removedFromGroup(AccountFields findAccount) {
+    wd.findElement(By.xpath("//*[@id=\"content\"]/div/i/a")).click();
+    selectAccountById(findAccount.getId());
+    wd.findElement(By.name("remove")).click();
+    toHomePage();
+    selectAllGroups();
+  }
+
+  private void selectAllGroups() {
+    wd.findElement(By.name("group")).click();
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    wd.findElement(By.name("group")).click();
   }
 
   private Accounts accountCache = null;
@@ -183,8 +200,4 @@ public class AccountHelper extends HelperBase{
   }
 
 
-  public void addToGroup(AccountFields findAccount) {
-    selectAccountById(findAccount.getId());
-    wd.findElement(By.name("add")).click();
-  }
 }
