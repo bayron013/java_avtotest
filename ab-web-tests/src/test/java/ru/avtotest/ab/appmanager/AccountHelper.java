@@ -183,24 +183,8 @@ public class AccountHelper extends HelperBase{
   }
 
 
-
-
-  public void goToEditGroupPage() {
-    wd.findElement(By.linkText("group page \"Август\"")).click();
-  }
-
-  public void editGropForAddAcc() {
-    wd.findElement(By.name("to_group")).click();
-    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText("Август");
-    wd.findElement(By.name("to_group")).click();
+  public void addToGroup(AccountFields findAccount) {
+    selectAccountById(findAccount.getId());
     wd.findElement(By.name("add")).click();
   }
-
-  public void editAccForAddToGroup(int id) {
-    wd.findElement(By.xpath((String.format("//input[@value='%s']/../../td[1]/a", id)))).click();
-  }
-
-
-
-
 }
