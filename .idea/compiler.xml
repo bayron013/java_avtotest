@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="ab-web-tests.main" target="12" />
       <module name="ab-web-tests.test" target="12" />
+      <module name="mantis-tests.main" target="12" />
+      <module name="mantis-tests.test" target="12" />
       <module name="sandbox.main" target="12" />
       <module name="sandbox.test" target="12" />
     </bytecodeTargetLevel>
