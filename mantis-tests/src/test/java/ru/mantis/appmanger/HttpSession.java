@@ -1,8 +1,20 @@
 package ru.mantis.appmanger;
 
 
-import java.io.IOException;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.client.LaxRedirectStrategy;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class HttpSession {
@@ -38,11 +50,7 @@ public class HttpSession {
     HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
     CloseableHttpResponse response = httpclient.execute(get);
     String body = geTextFrom(response);
-    return body.contains(String.format("<span class=\"italic\">%s</span>", username));
+    return body.contains(String.format("<span class=\"user-info\">%s</span>", username));
   }
 
-  private class BasicNameValuePair {
-    public BasicNameValuePair(String password, String password) {
-    }
-  }
 }
