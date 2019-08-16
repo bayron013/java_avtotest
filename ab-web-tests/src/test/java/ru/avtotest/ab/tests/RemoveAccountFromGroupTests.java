@@ -14,17 +14,17 @@ public class RemoveAccountFromGroupTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.db().accounts().size() == 0) {
+      if (app.db().groups().size() == 0) {
+        app.goTo().groupPage();
+        app.group().create(new GroupData().withName("Запасной вариант")
+                .withHeader("Запасная голова").withFooter("Запасные ноги"));
+        app.goTo().homePage();
+      }
       app.account().create(new AccountFields()
               .whithFirstname("Михаил").whithLastname("Александрович")
               .whithMiddlename("Крузенштерн").whithNickname("Gorilla777")
               .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home")
               .whithSecondEmail("- mail(  )@E-mail/"), false);
-      app.goTo().homePage();
-    }
-    if (app.db().groups().size() == 0) {
-      app.goTo().groupPage();
-      app.group().create(new GroupData().withName("Запасной вариант")
-              .withHeader("Запасная голова").withFooter("Запасные ноги"));
       app.goTo().homePage();
     }
   }
