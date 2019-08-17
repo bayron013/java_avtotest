@@ -48,15 +48,17 @@ public class AddAccountToGroupTests extends TestBase{
           assertThat(groupsAfter, equalTo(groupsBefore.withAddedGr(groupsWithAdded.iterator().next())));
         }
       }
+      app.goTo().homePage();
       app.account().showAllGroups();
     }
   }
 
 
+
   }
 
   /*
-  @Test
+  @Test   (это предыдущий вариант)
   public void testAddAccountToGroup() {
 
     Accounts before = app.db().accounts();

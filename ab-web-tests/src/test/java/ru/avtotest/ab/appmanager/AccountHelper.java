@@ -127,9 +127,14 @@ public class AccountHelper extends HelperBase{
     wd.findElement(By.name("add")).click();
   }
 
-  public void removedFromGroup(AccountFields findAccount) {
-    wd.findElement(By.xpath("//*[@id=\"content\"]/div/i/a")).click();
-    selectAccountById(findAccount.getId());
+  public void filterByGroup(AccountFields account) {
+    new Select(wd.findElement(By.cssSelector("select[name='group']")))
+            .selectByVisibleText(account.getGroups().iterator().next().getName());
+  }
+
+  public void removedFromGroup(AccountFields account) {
+    filterByGroup(account);
+    selectAccountById(account.getId());
     wd.findElement(By.name("remove")).click();
     toHomePage();
     selectAllGroups();
@@ -200,4 +205,10 @@ public class AccountHelper extends HelperBase{
   }
 
 
+  public void showAllGroups() {
+    wd.findElement(By.name("group")).click();
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+    wd.findElement(By.name("group")).click();
+
+  }
 }
