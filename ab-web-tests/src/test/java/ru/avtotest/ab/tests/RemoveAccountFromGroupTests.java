@@ -26,9 +26,15 @@ public class RemoveAccountFromGroupTests extends TestBase {
               .whithMiddlename("Крузенштерн").whithNickname("Gorilla777")
               .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home")
               .whithSecondEmail("- mail(  )@E-mail/"), false);
-      app.goTo().homePage();
     }
-    
+    Accounts accounts = app.db().accounts();
+    Groups groups = app.db().groups();
+    for (AccountFields account : accounts) {
+      if (account.getGroups().size() != groups.size()) {
+        app.account().addToGroup(account);
+      }
+    }
+    app.goTo().homePage();
   }
 
 
