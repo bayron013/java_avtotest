@@ -14,7 +14,6 @@ public class RemoveAccountFromGroupTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
-//    if (app.db().accounts().getGroups().size() )
     if (app.db().accounts().size() == 0) {
       if (app.db().groups().size() == 0) {
         app.goTo().groupPage();
@@ -29,6 +28,7 @@ public class RemoveAccountFromGroupTests extends TestBase {
               .whithSecondEmail("- mail(  )@E-mail/"), false);
       app.goTo().homePage();
     }
+    
   }
 
 

@@ -28,6 +28,19 @@ public class AddAccountToGroupTests extends TestBase{
               .whithSecondEmail("- mail(  )@E-mail/"), false);
       app.goTo().homePage();
     }
+    Accounts accounts = app.db().accounts();
+    Groups groups = app.db().groups();
+    for (AccountFields account : accounts) {
+      if (account.getGroups().size() == groups.size()) {
+        app.account().create(new AccountFields()
+                .whithFirstname("Михаил").whithLastname("Александрович")
+                .whithMiddlename("Крузенштерн").whithNickname("Gorilla777")
+                .whithCompany("Volkswagen").whithAddress("Russia").whithHome("Sweet Home")
+                .whithSecondEmail("- mail(  )@E-mail/"), false);
+      }
+      return;
+    }
+    app.goTo().homePage();
   }
 
   @Test
@@ -52,8 +65,6 @@ public class AddAccountToGroupTests extends TestBase{
       app.account().showAllGroups();
     }
   }
-
-
 
   }
 
