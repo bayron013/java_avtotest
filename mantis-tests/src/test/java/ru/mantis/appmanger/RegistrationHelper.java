@@ -3,7 +3,7 @@ package ru.mantis.appmanger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class RegistrationHelper extends HelperBase {
+public class RegistrationHelper extends BaseHelper {
   private WebDriver wd;
 
   public RegistrationHelper(ApplicationManager app) {
