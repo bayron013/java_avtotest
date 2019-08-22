@@ -17,7 +17,7 @@ public class JamesHelper {
   private PrintStream out;
   private InputStream in;
   private String mailserver;
-  private Store;
+  private Store store;
 
 
   public JamesHelper(ApplicationManager app) {
