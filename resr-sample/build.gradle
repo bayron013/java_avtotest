@@ -8,4 +8,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.apache.httpcomponents:httpclient:4.5.9'
     implementation 'org.apache.httpcomponents:fluent-hc:4.5.9'
+    implementation 'io.rest-assured:rest-assured:4.0.0'
 }
