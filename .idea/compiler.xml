@@ -6,6 +6,8 @@
       <module name="ab-web-tests.test" target="12" />
       <module name="mantis-tests.main" target="12" />
       <module name="mantis-tests.test" target="12" />
+      <module name="resr-sample.main" target="12" />
+      <module name="resr-sample.test" target="12" />
       <module name="sandbox.main" target="12" />
       <module name="sandbox.test" target="12" />
       <module name="soap-sample.main" target="12" />
