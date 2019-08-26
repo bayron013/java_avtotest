@@ -25,6 +25,7 @@ public class ApplicationManager {
   private NavigationHelper navigationHelper;
   private UserHelper userHelper;
   private LoginHelper loginHelper;
+  private SoapHelper soapHelper;
 
 
 
@@ -123,4 +124,10 @@ public class ApplicationManager {
     return userHelper;
   }
 
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
+  }
 }
